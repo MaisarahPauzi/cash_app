@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Cash Note
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding="true">
+  <ion-card>
+      <ion-item>
+        <ion-label color="primary" position="floating">Add Date</ion-label>
+        <ion-datetime  displayFormat="MM/DD/YYYY" [(ngModel)]="new_date" (ionChange)="addCard()"></ion-datetime>
+      </ion-item>
+
+
+  </ion-card>
+  <ion-card *ngFor="let card of date_card ; let i= index">
+      <ion-card-header>
+          <ion-card-title><b><ion-datetime displayFormat="DDDD, MM/DD/YYYY" [(ngModel)]="date_card[i].date"></ion-datetime></b></ion-card-title>
+        </ion-card-header>
+
+      <ion-card-content>
+          <ion-item>
+              <ion-label color="primary">New Item:</ion-label>
+              <ion-input [(ngModel)]="card.new_item"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label color="primary">Price: RM</ion-label>
+              <ion-input type="number" [(ngModel)]="card.new_price"></ion-input>
+          </ion-item>
+          <ion-button color="secondary" expand="block" (click) ="btnClick(i)">ADD</ion-button>
+        
+        <ion-list color="secondary">
+            <ion-item>
+              <b>Purchased Items</b>
+            </ion-item>
+            <ion-item color="light" *ngFor="let item of card.items">
+                <ion-label>{{item.name}}: RM {{item.price.toFixed(2)}}</ion-label>
+            </ion-item>
+        </ion-list>
+        <ion-item color="warning">
+            <ion-label color="dark"><b>Total: RM {{card.total.toFixed(2)}}</b></ion-label>
+        </ion-item>
+       
+      </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-title>Grand Total: RM {{overall_total.toFixed(2)}}</ion-title>
+  </ion-toolbar>
+</ion-footer>
